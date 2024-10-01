@@ -1,0 +1,223 @@
+---
+title: "DL_performance"
+author: "Ye Bi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(data.table)
+library(dplyr)
+library(stringr)
+library(RColorBrewer)
+library(ggplot2)
+library(readxl)
+```
+
+
+```{r}
+# reg = fread("../Postprocessing/DLregressionResultsSumm - CNN.csv")
+reg0 <- read_excel("../../OutputsSummary/DL/output_cv1_Mobile_Model_Performance.xlsx")
+reg = reg0[!duplicated(reg0), ]
+
+reg <- reg %>% mutate(`Test MAPE` = as.numeric(str_remove(`Test MAPE`, "%"))) 
+
+df <- reg %>%
+  group_by(Visit, Model) %>%
+  filter(`Batch size` == 100 & Epochs==300) %>%
+  filter(`Test MAPE` == min(`Test MAPE`)) %>%
+  ungroup()
+
+
+
+table(df$Visit)
+
+models = unique(df$Model)
+
+
+
+
+df <- df %>%
+  mutate(Visit = case_when(
+    Visit == 718 ~ "T1",
+    Visit == 801 ~ "T2",
+    Visit == 815 ~ "T3",
+    Visit == 829 ~ "T4",
+    Visit == 912 ~ "T5",
+    Visit == 927 ~ "T6",
+    TRUE ~ as.character(Visit)
+  ))
+
+
+df$Model = factor(df$Model, levels = c(
+  "MobileNet050", "MobileNet075", "MobileNet100", "MobileNetV3Small050",
+  "MobileNetV3Large075", "MobileNetV3Large100", "MobileViT_XXS",
+  "MobileViT_S", "MobileViT_V2_050", "MobileViT_V2_100",
+  "MobileViT_V2_150", "MobileViT_V2_200", "ResNet50"
+))
+
+# write.csv(df, file = "../../OutputsSummary/DL/brief_output_cv1_Mobile_Model_Performance.csv", quote=F, row.names = F)
+```
+
+
+```{r}
+best_rows <- df %>%
+  group_by(Visit) %>%
+  slice_min(order_by = `Test MAPE`, n = 4) %>%
+  droplevels()%>%
+  ungroup()
+
+table(best_rows$Model)
+```
+
+
+```{r}
+ggplot(df, aes(x = as.factor(Model), y = `Test MAPE`*100, fill = Model)) +
+  # geom_point()+
+  geom_bar(stat = "identity", position = position_dodge()) +
+  geom_text(aes(label = sprintf("%.2f", `Test MAPE` * 100)), 
+            vjust = -0.3, position = position_dodge(width = 0.9), size = 2.5) +
+  labs(x = "Models", y = "Test MAPE/%") +
+  scale_y_continuous(breaks = seq(0, 10, by = 1), limits = c(0, 10))+
+  theme_bw() +
+  facet_wrap(~ Visit)+
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        axis.title.x = element_text(margin = margin(t = 15)),
+        axis.title.y = element_text(margin = margin(r = 15)))+
+  scale_fill_viridis_d()
+dev.print(pdf, "../../OutputsSummary/DL/Mobile_performance.pdf", width = 10, height=10)
+```
+
+
+
+
+```{r}
+reg2 <- fread("../../OutputsSummary/DL/output_cv2_img_thr_10.csv")
+reg2_0 <- fread("../../OutputsSummary/DL/output_cv2_0_img_thr_10.csv")
+
+reg2_0 = reg2_0 %>% filter(image_count_thr == 10) 
+
+df2_0= reg2_0 %>% mutate(`Test MAPE` = as.numeric(str_remove(`Test MAPE`, "%"))) 
+
+df2_0 <- df2_0 %>%
+  mutate(Visit = case_when(
+    # Visit == 718 ~ "A",
+    Visit == 801 ~ "A",
+    Visit == 815 ~ "B",
+    Visit == 829 ~ "C",
+    Visit == 912 ~ "D",
+    Visit == 927 ~ "E",
+    TRUE ~ as.character(Visit)
+  ),
+    cvv = "cv2_0")
+
+df2 = reg2 %>% mutate(`Test MAPE` = as.numeric(str_remove(`Test MAPE`, "%"))) 
+
+df2 <- df2 %>%
+  mutate(Visit = case_when(
+    # Visit == 718 ~ "A",
+    Visit == 801 ~ "A",
+    Visit == 815 ~ "B",
+    Visit == 829 ~ "C",
+    Visit == 912 ~ "D",
+    Visit == 927 ~ "E",
+    TRUE ~ as.character(Visit)
+  ),
+  cvv = "cv2")
+
+dff2 = rbind(df2, df2_0)
+# write.csv(dff2, file = "../../OutputsSummary/DL/brief_output_cv2_Mobile_Model_Performance_thr_10.csv", quote=F, row.names = F)
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+
+# Assuming dff2 is your data frame
+cv_values <- sort(unique(dff2$CV))
+
+# Create a list to store the plots
+plots <- list()
+i = 1
+# Loop through each CV value and create a plot
+for (cv in cv_values) {
+  # Filter the data for the current CV value
+  df_filtered <- dff2 %>% filter(CV == cv)
+  
+  # Create the plot
+  p <- ggplot(df_filtered, aes(x = as.factor(Model), y = `Test MAPE`, fill = paste(Model, cvv))) +
+    geom_bar(stat = "identity", position = position_dodge()) +
+    geom_text(aes(label = sprintf("%.2f", `Test MAPE`)),
+              vjust = -0.3, position = position_dodge(width = 0.9), size = 2) +
+    labs(x = "Models", y = "Test MAPE/%", fill = "Model and CV") +
+    scale_y_continuous(breaks = seq(0, 8, by = 1)) +
+    theme_bw() +
+    facet_wrap(~ Visit, nrow=3) +
+    theme(
+      axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+      axis.title.x = element_text(margin = margin(t = 15)),
+      axis.title.y = element_text(margin = margin(r = 15))
+    ) +
+    scale_fill_viridis_d(alpha = 0.95, option = 'plasma', end = 0.9) +
+    ggtitle(paste("CV Rate=", cv))
+  # Add the plot to the list
+  plots[[i]] <- p
+  i = i+1
+}
+
+# Combine the plots with a common legend
+combined_plot <- ggarrange(plotlist = plots, ncol = 3, nrow = 1, common.legend = TRUE, legend = "top")
+
+# Print the combined plot
+print(combined_plot)
+
+```
+
+```{r}
+ggplot(dff2, aes(x = as.factor(paste(Model, CV)), y = `Test MAPE`, group = cvv, fill = paste(Model, cvv))) +
+  geom_bar(data = dff2[dff2$cvv == "cv2", ], stat = "identity", position = position_dodge()) +
+  geom_text(data = dff2[dff2$cvv == "cv2", ], aes(label = sprintf("%.2f", `Test MAPE`)),
+            vjust = -1, position = position_dodge(width = 0.9), size = 3) +
+  geom_point(data = dff2[dff2$cvv == "cv2_0", ], position = position_dodge(width = 0.9), size = 1, color='red') +
+  geom_line(data = dff2[dff2$cvv == "cv2_0", ], aes(group = Model, color='red'), position = position_dodge(width = 0.9)) +
+  labs(x = "Model", y = "Mean absolute percent error/%", fill = "CV design") +
+  scale_y_continuous(breaks = seq(0, 10, by = 2), limits = c(0,10)) +
+  theme_bw() +
+  facet_wrap(~ Visit) +
+  theme(
+    legend.position = 'none',
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+    axis.title.x = element_text(margin = margin(t = 15)),
+    axis.title.y = element_text(margin = margin(r = 15))
+  ) +
+  scale_fill_viridis_d(alpha = 0.95, option = 'mako', begin=0.3, end = 0.9)
+dev.print(pdf, "../../OutputsSummary/DL/Mobile_performance_cv2_imgthr_10.pdf", width = 10, height=10)
+```
+
+
+```{r}
+ggplot(dff2, aes(x = as.factor(paste(Model, CV)), y = `Test MAPE`, fill = paste(Model, cvv))) +
+  # geom_point()+
+  geom_bar(stat = "identity", position = position_dodge()) +
+  geom_text(aes(label = sprintf("%.2f", `Test MAPE`)),
+            vjust = -0.3, position = position_dodge(width = 0.9), size = 2) +
+  labs(x = "Models", y = "Test MAPE/%", fill = "Model and CV") +
+  scale_y_continuous(breaks = seq(0, 8, by = 1))+
+  theme_bw() +
+  facet_wrap(~ Visit)+
+  theme(
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+        axis.title.x = element_text(margin = margin(t = 15)),
+        axis.title.y = element_text(margin = margin(r = 15)))+
+  scale_fill_viridis_d(alpha=0.95, option='plasma', end = 0.9)
+# dev.print(pdf, "../../OutputsSummary/DL/Mobile_performance_cv2_imgthr_10.pdf", width = 13, height=10)
+
+
+```
+

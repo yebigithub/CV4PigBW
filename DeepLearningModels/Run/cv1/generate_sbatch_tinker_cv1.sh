@@ -26,7 +26,7 @@ module load Anaconda3/2024.02-1
 source activate tf_gpu3
 module list
 
-python /home/yebi/ComputerVision_PLF/Pig_BW/Pig_BW_DL_beta/DL/RunRun4pred_kcam.py \\
+python /home/yebi/ComputerVision_PLF/Pig_BW/Pig_BW_DL_beta/DL/train_test.py \\
     --modell ${MODELL} \\
     --image_size 150 \\
     --visit ${VISIT} \\
