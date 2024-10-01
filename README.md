@@ -23,8 +23,31 @@ Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the cent
 Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.
 
 ## Deep learning models
+<p align="center">
+  <img src='./Figures/DL_workflow.png' width='70%' height='70%' alt="">
+</p>
+Figure 4. Overview of the deep learning workflow for body weight prediction. Depth videos were processed into images and comma-separated values (CSV) files. YOLOv8 filtered out poorly positioned or obstructed images. The quality-controlled CSV files were converted to grayscale images, padded, and resized. Neural networks are then trained and evaluated using four metrics. MAPE: mean absolute percentage error; $R^2$: coefficient of determination; MAE: mean absolute error; and RMSE: root mean squared error.
+
 ### Depth file preprocessing
+- [ConvertCSV2DepthImage.py](./Preprocessing/ConvertCSV2DepthImage.py) Convert depth CSV files containing distance information in meters to depth grayscale images.
+  
 ### Supervised neural networks
-### Activation heatmaps visualization
-### Implementation
+- [train_test.py](./DeepLearningModels/train_test.py) Deep learning models training. 
+
 ## Cross-validation strategy
+- cv1, Single time point cross validation.
+  - [generate_multiple_sbatch_tinker_cv1.sh](./DeepLearningModels/Run/cv1/generate_multiple_sbatch_tinker_cv1.sh)
+  - [generate_sbatch_tinker_cv1.sh](./DeepLearningModels/Run/cv1/generate_sbatch_tinker_cv1.sh)
+- cv2, Time series forecasting cross-validation design
+  - []()
+  - []()
+<p align="center">
+  <img src='./Figures/cv2_design.png' width='70%' height='70%' alt="">
+</p>
+Figure 5. Time series forecasting cross-validation design. Subsets of pigs from earlier and most recent time points (shown in blue) were used to train models to predict the body weight of pigs at the most recent time points (shown in red). Five scenarios (A to E) were considered for predicting pigs from T2 to T6. T1 to T6 represent six farm visits.
+
+
+### Activation heatmaps visualization
+- []()
+
+### Prediction visulization
