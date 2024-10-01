@@ -1,4 +1,4 @@
-#Author Ye Bi 10/01/2023
+#Author Ye Bi 10/01/2024
 #this script uses rs-convert to convert .bag files inot PNG format
 
 import os

@@ -1,14 +1,10 @@
+#Author Ye Bi 10/01/2024
+
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.image import img_to_array
 from PIL import Image
 import os
 import numpy as np
-
-
-# from keras.applications.resnet50 import ResNet50
-# import matplotlib.pyplot as plt
-# from tensorflow.keras.applications.xception import Xception
-# from tensorflow.keras.applications.resnet50 import ResNet50
 import pandas as pd
 import tensorflow as tf
 
