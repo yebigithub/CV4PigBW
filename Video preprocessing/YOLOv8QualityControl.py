@@ -1,14 +1,6 @@
 import os
-import argparse
-import sys
-import csv
 import numpy as np
-import cv2
-import pandas as pd
-import torch
 import shutil
-import os, sys
-from PIL import Image
 
 
 rootdir = "YourFolder"
