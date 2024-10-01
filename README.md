@@ -6,6 +6,19 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 
 ## Video preprocessing
 - [ConvertBag2DepthImage&CSV.py](./Preprocessing/ConvertBag2DepthImage&CSV.py) The depth data collected in .bag video format were converted to PNG depth images and comma-separated value (CSV) depth map files
+- [YOLOv8QualityControl.py](./Preprocessing/YOLOv8QualityControl.py) YOLOv8 to clean up raw dataset.
+
+<p align="center">
+  <img src='./Figures/YOLOv8.png' width='70%' height='70%' alt="">
+</p>
+Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the center of the image. (B) Pig detection rate of 0.89: acceptable image because the pig is in the center of the image. (C) Pig and block detection: both the pig and the block are in the image. (D) Pig and block detection: both the pig and the block are in the image, but the pig is not in the center of the image. (E) No detection: multiple pigs in the image. (F) Block detection rate of 0.63: Only block is detected. (G) Pig and block detection: the camera is positioned in the opposite direction. (H) Pig detection rate of 0.90: acceptable image because the pig is in the center of the image but the camera is positioned in the opposite direction.  
+
+- [ImageCount_drawing.Rmd](./Preprocessing/ImageCount_drawing.Rmd) Image Count per animal.
+<p align="center">
+  <img src='./Figures/image_count.png' width='70%' height='70%' alt="">
+</p>
+Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.
+
 ## Deep learning models
 ### Depth file preprocessing
 ### Supervised neural networks
