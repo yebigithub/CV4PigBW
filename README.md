@@ -9,7 +9,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 - [YOLOv8QualityControl.py](./Preprocessing/YOLOv8QualityControl.py) YOLOv8 to clean up raw dataset.
 
 <p align="center">
-  <img src='./Figures/YOLOv8.png' width='70%' height='70%' alt="">
+  <img src='./Figures/YOLOv8.jpg' width='50%' height='50%' alt="">
 </p>
 Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the center of the image. (B) Pig detection rate of 0.89: acceptable image because the pig is in the center of the image. (C) Pig and block detection: both the pig and the block are in the image. (D) Pig and block detection: both the pig and the block are in the image, but the pig is not in the center of the image. (E) No detection: multiple pigs in the image. (F) Block detection rate of 0.63: Only block is detected. (G) Pig and block detection: the camera is positioned in the opposite direction. (H) Pig detection rate of 0.90: acceptable image because the pig is in the center of the image but the camera is positioned in the opposite direction.  
 
