@@ -13,7 +13,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/YOLOv8.jpg' width='30%' height='50%' alt="">
 </p>
-<p align="center" style="font-size: 12px;">
+<p align="center" style="font-size: 11px;">
 <i>Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the center of the image. (B) Pig detection rate of 0.89: acceptable image because the pig is in the center of the image. (C) Pig and block detection: both the pig and the block are in the image. (D) Pig and block detection: both the pig and the block are in the image, but the pig is not in the center of the image. (E) No detection: multiple pigs in the image. (F) Block detection rate of 0.63: Only block is detected. (G) Pig and block detection: the camera is positioned in the opposite direction. (H) Pig detection rate of 0.90: acceptable image because the pig is in the center of the image but the camera is positioned in the opposite direction.</i>    
 </p>
 
@@ -21,7 +21,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/image_count.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 12px;">
+<p align="center" style="font-size: 11px;">
 <i>Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.</i>
 </p>
 
@@ -29,7 +29,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/DL_workflow.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 12px;">
+<p align="center" style="font-size: 11px;">
 <i>Figure 4. Overview of the deep learning workflow for body weight prediction. Depth videos were processed into images and comma-separated values (CSV) files. YOLOv8 filtered out poorly positioned or obstructed images. The quality-controlled CSV files were converted to grayscale images, padded, and resized. Neural networks are then trained and evaluated using four metrics. MAPE: mean absolute percentage error; $R^2$: coefficient of determination; MAE: mean absolute error; and RMSE: root mean squared error.</i>
 </p>
 
