@@ -11,22 +11,27 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 - [YOLOv8QualityControl.py](./Preprocessing/YOLOv8QualityControl.py) YOLOv8 to clean up raw dataset.
 
 <p align="center">
-  <img src='./Figures/YOLOv8.jpg' width='50%' height='50%' alt="">
+  <img src='./Figures/YOLOv8.jpg' width='30%' height='50%' alt="">
 </p>
-Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the center of the image. (B) Pig detection rate of 0.89: acceptable image because the pig is in the center of the image. (C) Pig and block detection: both the pig and the block are in the image. (D) Pig and block detection: both the pig and the block are in the image, but the pig is not in the center of the image. (E) No detection: multiple pigs in the image. (F) Block detection rate of 0.63: Only block is detected. (G) Pig and block detection: the camera is positioned in the opposite direction. (H) Pig detection rate of 0.90: acceptable image because the pig is in the center of the image but the camera is positioned in the opposite direction.    
-
+<p align="center" style="font-size: 12px;">
+<i>Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the center of the image. (B) Pig detection rate of 0.89: acceptable image because the pig is in the center of the image. (C) Pig and block detection: both the pig and the block are in the image. (D) Pig and block detection: both the pig and the block are in the image, but the pig is not in the center of the image. (E) No detection: multiple pigs in the image. (F) Block detection rate of 0.63: Only block is detected. (G) Pig and block detection: the camera is positioned in the opposite direction. (H) Pig detection rate of 0.90: acceptable image because the pig is in the center of the image but the camera is positioned in the opposite direction.</i>    
+</p>
 
 - [ImageCount_drawing.Rmd](./Preprocessing/ImageCount_drawing.Rmd) Image Count per animal.
 <p align="center">
   <img src='./Figures/image_count.png' width='70%' height='70%' alt="">
 </p>
-Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.
+<p align="center" style="font-size: 12px;">
+<i>Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.</i>
+</p>
 
 ## Deep learning models
 <p align="center">
   <img src='./Figures/DL_workflow.png' width='70%' height='70%' alt="">
 </p>
-Figure 4. Overview of the deep learning workflow for body weight prediction. Depth videos were processed into images and comma-separated values (CSV) files. YOLOv8 filtered out poorly positioned or obstructed images. The quality-controlled CSV files were converted to grayscale images, padded, and resized. Neural networks are then trained and evaluated using four metrics. MAPE: mean absolute percentage error; $R^2$: coefficient of determination; MAE: mean absolute error; and RMSE: root mean squared error.
+<p align="center" style="font-size: 12px;">
+<i>Figure 4. Overview of the deep learning workflow for body weight prediction. Depth videos were processed into images and comma-separated values (CSV) files. YOLOv8 filtered out poorly positioned or obstructed images. The quality-controlled CSV files were converted to grayscale images, padded, and resized. Neural networks are then trained and evaluated using four metrics. MAPE: mean absolute percentage error; $R^2$: coefficient of determination; MAE: mean absolute error; and RMSE: root mean squared error.</i>
+</p>
 
 ### Depth file preprocessing
 - [ConvertCSV2DepthImage.py](./Preprocessing/ConvertCSV2DepthImage.py) Convert depth CSV files containing distance information in meters to depth grayscale images.
@@ -35,17 +40,20 @@ Figure 4. Overview of the deep learning workflow for body weight prediction. Dep
 - [train_test.py](./DeepLearningModels/train_test.py) Deep learning models training. 
 
 ## Cross-validation strategy
-- cv1, Single time point cross validation.
+- Single time point cross validation (CV1)
   - [generate_multiple_sbatch_tinker_cv1.sh](./DeepLearningModels/Run/cv1/generate_multiple_sbatch_tinker_cv1.sh)
   - [generate_sbatch_tinker_cv1.sh](./DeepLearningModels/Run/cv1/generate_sbatch_tinker_cv1.sh)
-- cv2, Time series forecasting cross-validation design
-  - []()
-  - []()
+- Time series forecasting cross-validation design (CV2)
+  - [generate_multiple_sbatch_tinker_cv2.sh](./DeepLearningModels/Run/cv2/generate_multiple_sbatch_tinker_cv2.sh)
+  - [generate_sbatch_tinker_cv2.sh](./DeepLearningModels/Run/cv2/generate_sbatch_tinker_cv2.sh)
+- Submit all jobs simultaneously. 
+  - [submit_all.sh](./DeepLearningModels/Run/submit_all.sh)
 <p align="center">
   <img src='./Figures/cv2_design.png' width='70%' height='70%' alt="">
 </p>
-Figure 5. Time series forecasting cross-validation design. Subsets of pigs from earlier and most recent time points (shown in blue) were used to train models to predict the body weight of pigs at the most recent time points (shown in red). Five scenarios (A to E) were considered for predicting pigs from T2 to T6. T1 to T6 represent six farm visits.
-
+<p align="center" style="font-size: 12px;">
+  <i>Figure 5. Time series forecasting cross-validation design. Subsets of pigs from earlier and most recent time points (shown in blue) were used to train models to predict the body weight of pigs at the most recent time points (shown in red). Five scenarios (A to E) were considered for predicting pigs from T2 to T6. T1 to T6 represent six farm visits.</i>
+</p>
 
 ### Activation heatmaps visualization
 - []()
