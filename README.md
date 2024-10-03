@@ -86,8 +86,9 @@ This part was run on the Virginia Tech Advanced Research Computing ([ARC](https:
 <p align="center">
   <img src='./Figures/Mobile_performance_cv2_imgthr_10.png' width='60%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 9px;">
-<i>Figure 10. Time series forecasting cross-validation prediction results. 0.25, 0.5, and 0.75 represent scenarios for the subset ratios 25%:75%, 50%:50%, and 75%:25%. Here, 75%:25% indicates that 75% of the data points from all previous time points were used as the training set to predict 25% of the current data points. The red squares represent full design cross-validation, and the bars represent sparse design cross-validation results.</i>
+<p align="center">
+<sub><i>Figure 10. Time series forecasting cross-validation prediction results. 0.25, 0.5, and 0.75 represent scenarios for the subset ratios 25%:75%, 50%:50%, and 75%:25%. Here, 75%:25% indicates that 75% of the data points from all previous time points were used as the training set to predict 25% of the current data points. The red squares represent full design cross-validation, and the bars represent sparse design cross-validation results.</i>
+</sub>
 
 ### Appendix
 - [loss_curve_drawing.py](./Postprocessing/loss_curve_drawing.py) Single time point cross-validation training history using the best model at each visit. 
