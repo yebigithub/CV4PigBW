@@ -18,12 +18,12 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 </p>
 
 - [ImageCount_drawing.Rmd](./Preprocessing/ImageCount_drawing.Rmd) Image Count per animal.
-<p align="center">
+<!-- <p align="center">
   <img src='./Figures/image_count.png' width='70%' height='70%' alt="">
 </p>
 <p align="center">
 <sub><i>Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.</i></sub>
-</p>
+</p> -->
 
 ## Deep learning models
 <p align="center">
@@ -52,7 +52,7 @@ This part was run on the Virginia Tech Advanced Research Computing ([ARC](https:
 - Submit all jobs simultaneously. 
   - [submit_all.sh](./DeepLearningModels/Run/submit_all.sh)
 <p align="center">
-  <img src='./Figures/cv2_design.png' width='70%' height='70%' alt="">
+  <img src='./Figures/cv2_design.png' width='50%' height='70%' alt="">
 </p>
 <p align="center">
   <sub><i>Figure 5. Time series forecasting cross-validation design. Subsets of pigs from earlier and most recent time points (shown in blue) were used to train models to predict the body weight of pigs at the most recent time points (shown in red). Five scenarios (A to E) were considered for predicting pigs from T2 to T6. T1 to T6 represent six farm visits.</i></sub>
