@@ -51,7 +51,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/cv2_design.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 12px;">
+<p align="center" style="font-size: 11px;">
   <i>Figure 5. Time series forecasting cross-validation design. Subsets of pigs from earlier and most recent time points (shown in blue) were used to train models to predict the body weight of pigs at the most recent time points (shown in red). Five scenarios (A to E) were considered for predicting pigs from T2 to T6. T1 to T6 represent six farm visits.</i>
 </p>
 
