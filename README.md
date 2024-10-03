@@ -13,7 +13,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/YOLOv8.png' width='70%' height='60%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
 <i>Figure2. YOLOv8 detection examples. (A) No detection: the pig is not in the center of the image. (B) Pig detection rate of 0.89: acceptable image because the pig is in the center of the image. (C) Pig and block detection: both the pig and the block are in the image. (D) Pig and block detection: both the pig and the block are in the image, but the pig is not in the center of the image. (E) No detection: multiple pigs in the image. (F) Block detection rate of 0.63: Only block is detected. (G) Pig and block detection: the camera is positioned in the opposite direction. (H) Pig detection rate of 0.90: acceptable image because the pig is in the center of the image but the camera is positioned in the opposite direction.</i>    
 </p>
 
@@ -21,7 +21,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/image_count.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
 <i>Figure3. Number of images for each pig across six farm visits. T1 to T6 represent six time points analyzed in this study. The dotted red line represents the number of images of 20.</i>
 </p>
 
@@ -29,7 +29,7 @@ Accurate pig body weight measurement is critical for pig growth, health, and mar
 <p align="center">
   <img src='./Figures/DL_workflow.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
 <i>Figure 4. Overview of the deep learning workflow for body weight prediction. Depth videos were processed into images and comma-separated values (CSV) files. YOLOv8 filtered out poorly positioned or obstructed images. The quality-controlled CSV files were converted to grayscale images, padded, and resized. Neural networks are then trained and evaluated using four metrics. MAPE: mean absolute percentage error; $R^2$: coefficient of determination; MAE: mean absolute error; and RMSE: root mean squared error.</i>
 </p>
 
@@ -54,7 +54,7 @@ This part was run on the Virginia Tech Advanced Research Computing ([ARC](https:
 <p align="center">
   <img src='./Figures/cv2_design.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
   <i>Figure 5. Time series forecasting cross-validation design. Subsets of pigs from earlier and most recent time points (shown in blue) were used to train models to predict the body weight of pigs at the most recent time points (shown in red). Five scenarios (A to E) were considered for predicting pigs from T2 to T6. T1 to T6 represent six farm visits.</i>
 </p>
 
@@ -63,7 +63,7 @@ This part was run on the Virginia Tech Advanced Research Computing ([ARC](https:
 <p align="center">
   <img src='./Figures/grad_cam.png' width='70%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
 <i>Figure 9. Gradient-weighted class activation mapping heatmaps for arbitrarily selected A) light, B) average, and C) heavy pigs from the T5 visit, generated with MobileViT-S.</i>
 </p>
 
@@ -74,9 +74,9 @@ This part was run on the Virginia Tech Advanced Research Computing ([ARC](https:
   - [Subgroup barplot](./Postprocessing/prediction_scatter_subgroup_drawing.ipynb)
 
 <p align="center">
-  <img src='./Figures/Mobile_performance.png' width='70%' height='70%' alt="">
+  <img src='./Figures/Mobile_performance.png' width='60%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
 <i>Figure 6. Single time point prediction results in the testing sets using the best model at each visit, along with the overall performance. The plots compare the predicted weight with the observed weight (ground truth). The red line represents the slope of 1. T1 to T6 represent six farm visits. RMSE: root mean squared error; $R^2$: coefficient of determination; MAPE: mean absolute percentage error;  and MAE: mean absolute error. </i>
 </p>
 
@@ -84,9 +84,9 @@ This part was run on the Virginia Tech Advanced Research Computing ([ARC](https:
   - [MAPE barplot](./Postprocessing/Mobile_performance_plot_drawing.Rmd)
 
 <p align="center">
-  <img src='./Figures/Mobile_performance_cv2_imgthr_10.png' width='70%' height='70%' alt="">
+  <img src='./Figures/Mobile_performance_cv2_imgthr_10.png' width='60%' height='70%' alt="">
 </p>
-<p align="center" style="font-size: 11px;">
+<p align="center" style="font-size: 9px;">
 <i>Figure 10. Time series forecasting cross-validation prediction results. 0.25, 0.5, and 0.75 represent scenarios for the subset ratios 25\%:75\%, 50\%:50\%, and 75\%:25\%. Here, 75\%:25\% indicates that 75\% of the data points from all previous time points were used as the training set to predict 25\% of the current data points. The red squares represent full design cross-validation, and the bars represent sparse design cross-validation results.</i>
 
 ### Appendix
