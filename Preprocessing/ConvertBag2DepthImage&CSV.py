@@ -1,4 +1,8 @@
 #Author Ye Bi 10/01/2024
+```
+Don't forget to put BagConvert.py(https://github.com/yebigithub/CV4PigBW/blob/main/Preprocessing/BagConvert.py) 
+inside of the same folder with this code.
+```
 
 from BagConvert import ConvertToPNG as convert
 
