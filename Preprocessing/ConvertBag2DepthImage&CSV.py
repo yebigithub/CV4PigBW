@@ -2,6 +2,7 @@
 ```
 Don't forget to put BagConvert.py(https://github.com/yebigithub/CV4PigBW/blob/main/Preprocessing/BagConvert.py) 
 inside of the same folder with this code.
+Also you need to download Intel RealSense SDK 2.0 (https://www.intelrealsense.com/sdk-2/)
 ```
 
 from BagConvert import ConvertToPNG as convert
